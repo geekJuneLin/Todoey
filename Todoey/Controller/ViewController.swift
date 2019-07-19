@@ -19,15 +19,15 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         
         let i1 = Item()
-        i1.toDo = "Eat 覃春虹"
+        i1.toDo = "Do homework"
         items.append(i1)
         
         let i2 = Item()
-        i2.toDo = "Eat 覃春虹 !"
+        i2.toDo = "Do house work"
         items.append(i2)
         
         let i3 = Item()
-        i3.toDo = "Eat 覃春虹 !!"
+        i3.toDo = "Cook dinner"
         items.append(i3)
         
         if let itemArr = defaults.array(forKey: "toDoList") as? [Item]{
