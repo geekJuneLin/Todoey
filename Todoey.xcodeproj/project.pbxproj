@@ -56,15 +56,39 @@
 		8E12496F22E07BAB009580EC /* Todoey */ = {
 			isa = PBXGroup;
 			children = (
-				8E12497022E07BAB009580EC /* AppDelegate.swift */,
-				8E12497222E07BAB009580EC /* ViewController.swift */,
-				8E12497422E07BAB009580EC /* Main.storyboard */,
-				8E12497922E07BAD009580EC /* LaunchScreen.storyboard */,
-				8E12497722E07BAD009580EC /* Assets.xcassets */,
-				8E12497C22E07BAD009580EC /* Info.plist */,
-				8E86485722E143C6000C2FD4 /* Item.swift */,
+				8E86485C22E14D1D000C2FD4 /* Controller */,
+				8E86485D22E14D27000C2FD4 /* Data Model */,
+				8E86485E22E14D36000C2FD4 /* Support Files */,
 			);
 			path = Todoey;
+			sourceTree = "<group>";
+		};
+		8E86485C22E14D1D000C2FD4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8E12497022E07BAB009580EC /* AppDelegate.swift */,
+				8E86485722E143C6000C2FD4 /* Item.swift */,
+				8E12497222E07BAB009580EC /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8E86485D22E14D27000C2FD4 /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				8E12497422E07BAB009580EC /* Main.storyboard */,
+				8E12497922E07BAD009580EC /* LaunchScreen.storyboard */,
+			);
+			path = "Data Model";
+			sourceTree = "<group>";
+		};
+		8E86485E22E14D36000C2FD4 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				8E12497722E07BAD009580EC /* Assets.xcassets */,
+				8E12497C22E07BAD009580EC /* Info.plist */,
+			);
+			path = "Support Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
