@@ -10,7 +10,8 @@ import UIKit
 
 class ViewController: UITableViewController {
 
-    let defaults = UserDefaults.standard
+    //get the file path of the plist that we need to create
+    let filePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Item.plist")
     
     //var declaration
     var items = [Item]()
@@ -18,21 +19,7 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let i1 = Item()
-        i1.toDo = "Do homework"
-        items.append(i1)
-        
-        let i2 = Item()
-        i2.toDo = "Do house work"
-        items.append(i2)
-        
-        let i3 = Item()
-        i3.toDo = "Cook dinner"
-        items.append(i3)
-        
-        if let itemArr = defaults.array(forKey: "toDoList") as? [Item]{
-            items = itemArr
-        }
+        loadData()
     }
     
     
@@ -56,6 +43,8 @@ class ViewController: UITableViewController {
         
         it.done = !it.done
         
+        saveData()
+        
         tableView.reloadData()
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -71,7 +60,7 @@ class ViewController: UITableViewController {
             let it = Item()
             it.toDo = textField.text!
             self.items.append(it)
-            self.defaults.set(self.items, forKey: "toDoList")
+            self.saveData()
             self.tableView.reloadData()
         }
         alert.addTextField {
@@ -81,6 +70,30 @@ class ViewController: UITableViewController {
         }
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
+    }
+    
+    //MARK: Data Model methods
+    
+    private func saveData(){
+        //create propertyList encoder and write the data into the plist file
+        let encoder = PropertyListEncoder()
+        do{
+            let data = try encoder.encode(items)
+            try data.write(to: filePath!)
+        } catch {
+            print("Error occurs \(error)")
+        }
+    }
+    
+    private func loadData(){
+        if let data = try? Data(contentsOf: filePath!){
+            let decoder = PropertyListDecoder()
+            do{
+                items = try decoder.decode([Item].self, from: data)
+            } catch {
+                print("Error occurs \(error)")
+            }
+        }
     }
 }
 
