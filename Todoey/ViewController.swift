@@ -10,12 +10,18 @@ import UIKit
 
 class ViewController: UITableViewController {
 
+    let defaults = UserDefaults.standard
+    
+    //var declaration
     var items = ["Buy food", "Do reaserch on 374", "Finish 361 assi"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        if let itemArr = defaults.array(forKey: "toDoList") as? [String]{
+            items = itemArr
+        }
     }
+    
     
     //MARK: UITable view datasource method
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -28,6 +34,7 @@ class ViewController: UITableViewController {
         return cell
     }
     
+    
     //MARK: UITable view delegate method
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark{
@@ -38,6 +45,7 @@ class ViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    
     //MARK: Add item button pressed func
     @IBAction func addBtnPressed(_ sender: UIBarButtonItem) {
         var textField = UITextField()
@@ -45,6 +53,7 @@ class ViewController: UITableViewController {
         let action = UIAlertAction(title: "Add Something", style: .default) {
             (action) in
             self.items.append(textField.text!)
+            self.defaults.set(self.items, forKey: "toDoList")
             self.tableView.reloadData()
         }
         alert.addTextField {
@@ -54,7 +63,6 @@ class ViewController: UITableViewController {
         }
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
-        
     }
 }
 
